@@ -2,6 +2,7 @@ package com.debugmode.activitytimer;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,16 +23,9 @@ public class VerifyPasswordDialog extends DialogFragment {
     }
 
     private Listener mListener;
-    private String mPassword;
 
-    public VerifyPasswordDialog setListener(Listener listener) {
+    public VerifyPasswordDialog(Listener listener) {
         mListener = listener;
-        return this;
-    }
-
-    public VerifyPasswordDialog setPassword(String password) {
-        mPassword = password;
-        return this;
     }
 
     @NonNull
@@ -47,8 +41,11 @@ public class VerifyPasswordDialog extends DialogFragment {
                         String password =
                                 ((EditText) VerifyPasswordDialog.this.getDialog().findViewById (R.id.password))
                                         .getText().toString();
-                        if (mPassword.length() > 0) {
-                            if (!password.equals(mPassword)) {
+                        String actualPassword =
+                                getContext().getSharedPreferences(Constants.PREFS, Context.MODE_PRIVATE)
+                                        .getString(Constants.PREFS_PASSWORD, "");
+                        if (actualPassword.length() > 0) {
+                            if (!password.equals(actualPassword)) {
                                 Toast.makeText(VerifyPasswordDialog.this.getContext(),
                                         R.string.password_mismatch, Toast.LENGTH_LONG)
                                         .show();

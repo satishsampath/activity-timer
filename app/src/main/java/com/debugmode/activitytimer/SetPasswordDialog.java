@@ -26,14 +26,9 @@ public class SetPasswordDialog extends DialogFragment {
     private Listener mListener;
     private String mOldPassword;
 
-    public SetPasswordDialog setListener(Listener listener) {
+    public SetPasswordDialog(String oldPassword, Listener listener) {
         mListener = listener;
-        return this;
-    }
-
-    public SetPasswordDialog setOldPassword(String password) {
-        mOldPassword = password;
-        return this;
+        mOldPassword = oldPassword;
     }
 
     @NonNull

@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">ActivityTimer</string>
-    <string name="error_not_device_owner">This app needs to be set as a device owner first.</string>
     <string name="activity_timer_webview_url">https://satishsampath.github.io/nd-activities/</string>
 
     <string name="button_ok">OK</string>
     <string name="button_cancel">Cancel</string>
 
+    <string name="dialog_choose_apps_title">Choose Apps To Allow</string>
     <string name="dialog_set_password_title">Set Password</string>
     <string name="hint_old_password">old password</string>
     <string name="hint_new_password">new password</string>
@@ -15,9 +15,10 @@
     <string name="dialog_verify_password_title">Enter Password</string>
     <string name="hint_password">password</string>
     <string name="password_mismatch">The password entered was incorrect.</string>
+    <string name="list_checked">\u2713</string>
+    <string name="list_unchecked"></string>
+    <string name="apps_list_timer_title">Timer</string>
 
-    <string name="exit">Exit</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="admin_description">ActivityTimer device admin description string</string>
+    <string name="menu_set_password">Set Password</string>
+    <string name="menu_choose_apps">Choose Apps</string>
 </resources>

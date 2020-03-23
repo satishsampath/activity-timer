@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.debugmode.activitytimer">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -10,22 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/timer"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:testOnly="true" >
-
-        <receiver
-            android:name=".ActivityTimerDeviceAdminReceiver"
-            android:description="@string/admin_description"
-            android:label="@string/app_name"
-            android:permission="android.permission.BIND_DEVICE_ADMIN">
-            <meta-data
-                android:name="android.app.device_admin"
-                android:resource="@xml/device_admin_receiver" />
-            <intent-filter>
-                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED"/>
-            </intent-filter>
-        </receiver>
-
+        android:theme="@style/AppTheme">
         <activity
             android:name=".ActivityTimerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -33,8 +18,12 @@
             android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
     </application>
