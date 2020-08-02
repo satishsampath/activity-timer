@@ -1,39 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
+    android:orientation="vertical"
     tools:context=".ActivityTimerActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/apps_list"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="32dp"
-        app:layoutManager="GridLayoutManager"
-        tools:listitem="@layout/main_apps_list_item" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    <FrameLayout
-        android:id="@+id/webview_container"
-        android:visibility="invisible"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <WebView
-            android:id="@+id/webview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-        <ImageView
-            android:id="@+id/webview_close"
-            android:layout_margin="8dp"
-            android:layout_gravity="right"
+        <com.debugmode.activitytimer.NumpadView
+            android:id="@+id/admin_numpad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/ic_menu_close_clear_cancel"
-            />
+            app:clearAfterMillis="1000"
+            app:size="@dimen/numpad_size" />
+        <Button
+            android:id="@+id/button_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            android:text="@string/button_menu" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/apps_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="32dp"
+            app:layoutManager="GridLayoutManager"
+            tools:listitem="@layout/main_apps_list_item" />
+
+        <FrameLayout
+            android:id="@+id/webview_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible">
+
+            <WebView
+                android:id="@+id/webview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
     </FrameLayout>
-</FrameLayout>
+</LinearLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:id="@+id/numpad0"
+            android:src="@drawable/numpad0" />
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:id="@+id/numpad1"
+            android:src="@drawable/numpad1" />
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:id="@+id/numpad2"
+            android:src="@drawable/numpad2" />
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:id="@+id/numpad3"
+            android:src="@drawable/numpad3" />
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:id="@+id/numpad4"
+            android:src="@drawable/numpad4" />
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:id="@+id/numpad5"
+            android:src="@drawable/numpad5" />
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:id="@+id/numpad6"
+            android:src="@drawable/numpad6" />
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:id="@+id/numpad7"
+            android:src="@drawable/numpad7" />
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:id="@+id/numpad8"
+            android:src="@drawable/numpad8" />
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:id="@+id/numpad9"
+            android:src="@drawable/numpad9" />
+
+</LinearLayout>

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -16,13 +17,17 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 
 /**
  * Single activity app to show a webview in a kiosk mode, but with the ability to exit if needed.
  */
 public class ActivityTimerActivity
         extends AppCompatActivity
-        implements MainAppsListAdapter.Listener, SharedPreferences.OnSharedPreferenceChangeListener {
+        implements MainAppsListAdapter.Listener,
+            SharedPreferences.OnSharedPreferenceChangeListener,
+            PopupMenu.OnMenuItemClickListener,
+            NumpadView.Listener {
 
     private void setAppsListLayoutManager() {
         RecyclerView rv = (RecyclerView) findViewById(R.id.apps_list);
@@ -54,9 +59,19 @@ public class ActivityTimerActivity
         setAppsListContent();
         getSharedPreferences(Constants.PREFS, MODE_PRIVATE).registerOnSharedPreferenceChangeListener(this);
 
+        ((NumpadView) findViewById(R.id.admin_numpad)).setListener(this);
+        findViewById(R.id.button_menu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu menu = new PopupMenu(v.getContext(), v);
+                menu.inflate(R.menu.main_menu);
+                menu.setOnMenuItemClickListener(ActivityTimerActivity.this);
+                menu.show();
+            }
+        });
         // Initialize the webview.
         WebView webview = (WebView) findViewById(R.id.webview);
-        webview.setLongClickable(true);
+        webview.setLongClickable(false);
         webview.setHapticFeedbackEnabled(false);
         webview.setOnLongClickListener(new WebView.OnLongClickListener() {
             @Override
@@ -69,14 +84,6 @@ public class ActivityTimerActivity
         settings.setUseWideViewPort(true);
         settings.setLoadWithOverviewMode(true);
         settings.setDomStorageEnabled(true);
-
-        // Hide webview container when the close button is clicked.
-        findViewById(R.id.webview_close).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onCloseTimerView();
-            }
-        });
     }
 
     @Override
@@ -87,25 +94,22 @@ public class ActivityTimerActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
+    public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.choose_apps:
                 onChooseAppsClicked();
-                return true;
+                break;
             case R.id.set_password:
                 onSetPassword();
-                return true;
+                break;
+            case R.id.close_timer:
+                onCloseTimerView();
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
+        findViewById(R.id.button_menu).setVisibility(View.INVISIBLE);
+        return true;
     }
 
     @Override
@@ -114,7 +118,8 @@ public class ActivityTimerActivity
     }
 
     private String getPassword() {
-        return getSharedPreferences(Constants.PREFS, MODE_PRIVATE).getString(Constants.PREFS_PASSWORD, "");
+        return getSharedPreferences(Constants.PREFS, MODE_PRIVATE).getString(
+                Constants.PREFS_PASSWORD, "000");
     }
 
     private void onSetPassword() {
@@ -131,28 +136,15 @@ public class ActivityTimerActivity
     }
 
     private void onChooseAppsClicked() {
-        new VerifyPasswordDialog(new VerifyPasswordDialog.Listener() {
-                @Override
-                public void onVerify() {
-                    ChooseAppsDialog dlg = new ChooseAppsDialog(2);
-                    dlg.show(getSupportFragmentManager(), "");
-                }
-            })
-            .show(getSupportFragmentManager(), "");
+        ChooseAppsDialog dlg = new ChooseAppsDialog(2);
+        dlg.show(getSupportFragmentManager(), "");
     }
 
     private void onCloseTimerView() {
-        new VerifyPasswordDialog(new VerifyPasswordDialog.Listener() {
-                @Override
-                public void onVerify() {
-                    findViewById(R.id.webview_container).setVisibility(View.INVISIBLE);
-                    WebView webView = (WebView) findViewById(R.id.webview);
-                    webView.loadUrl("about:blank");
-                    webView.clearCache(true);
-                }
-            })
-            .show(getSupportFragmentManager(), "");
-
+        WebView webView = (WebView) findViewById(R.id.webview);
+        webView.loadUrl("about:blank");
+        webView.clearCache(true);
+        findViewById(R.id.webview_container).setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -166,4 +158,11 @@ public class ActivityTimerActivity
             startActivity(intent);
         }
     }
+
+    @Override
+    public void onNumpadString(String str) {
+        if (str.equals(getPassword()))
+            findViewById(R.id.button_menu).setVisibility(View.VISIBLE);
+    }
+
 }

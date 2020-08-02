@@ -32,11 +32,13 @@ public class MainAppsListAdapter extends RecyclerView.Adapter<MainAppsListAdapte
         mListener = listener;
         Set<String> uris = mContext.getSharedPreferences(Constants.PREFS, Context.MODE_PRIVATE)
                 .getStringSet(Constants.PREFS_SELECTED_APPS, null);
-        for (String uri : uris) {
-            try {
-                Intent intent = Intent.parseUri(uri, 0);
-                mApps.add(intent);
-            } catch(URISyntaxException e) {
+        if (uris != null) {
+            for (String uri : uris) {
+                try {
+                    Intent intent = Intent.parseUri(uri, 0);
+                    mApps.add(intent);
+                } catch (URISyntaxException e) {
+                }
             }
         }
         mApps.add(new Intent(Constants.ACTION_LAUNCH_TIMER));

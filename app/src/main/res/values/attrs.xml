@@ -9,4 +9,9 @@
         <attr name="metaButtonBarButtonStyle" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="NumpadView">
+        <attr name="size" format="dimension"/>
+        <attr name="clearAfterMillis" format="integer"/>
+    </declare-styleable>
+
 </resources>

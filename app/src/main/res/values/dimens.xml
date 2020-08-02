@@ -2,4 +2,5 @@
 <resources>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="main_apps_list_item_image_size">64dp</dimen>
+    <dimen name="numpad_size">48dp</dimen>
 </resources>

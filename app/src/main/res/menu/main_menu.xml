@@ -4,4 +4,6 @@
         android:title="@string/menu_choose_apps" />
     <item android:id="@+id/set_password"
         android:title="@string/menu_set_password" />
+    <item android:id="@+id/close_timer"
+        android:title="@string/menu_close_timer" />
 </menu>

@@ -18,7 +18,9 @@
     <string name="list_checked">\u2713</string>
     <string name="list_unchecked"></string>
     <string name="apps_list_timer_title">Timer</string>
+    <string name="button_menu">Menu</string>
 
     <string name="menu_set_password">Set Password</string>
     <string name="menu_choose_apps">Choose Apps</string>
+    <string name="menu_close_timer">Close Timer</string>
 </resources>
